@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Solicitation:</strong>
+  <%= @social_share.solicitation %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @social_share.type %>
+</p>
+
+<%= link_to 'Edit', edit_social_share_path(@social_share) %> |
+<%= link_to 'Back', social_shares_path %>

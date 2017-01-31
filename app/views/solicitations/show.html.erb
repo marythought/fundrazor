@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Goal:</strong>
+  <%= @solicitation.goal %>
+</p>
+
+<p>
+  <strong>Main image:</strong>
+  <%= @solicitation.main_image %>
+</p>
+
+<p>
+  <strong>Campaign:</strong>
+  <%= @solicitation.campaign %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @solicitation.user %>
+</p>
+
+<%= link_to 'Edit', edit_solicitation_path(@solicitation) %> |
+<%= link_to 'Back', solicitations_path %>

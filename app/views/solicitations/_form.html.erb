@@ -1,0 +1,37 @@
+<%= form_for(solicitation) do |f| %>
+  <% if solicitation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(solicitation.errors.count, "error") %> prohibited this solicitation from being saved:</h2>
+
+      <ul>
+      <% solicitation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :goal %>
+    <%= f.text_field :goal %>
+  </div>
+
+  <div class="field">
+    <%= f.label :main_image %>
+    <%= f.text_field :main_image %>
+  </div>
+
+  <div class="field">
+    <%= f.label :campaign_id %>
+    <%= f.text_field :campaign_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.text_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
