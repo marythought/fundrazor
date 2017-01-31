@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170131055220) do
+ActiveRecord::Schema.define(version: 20170131071550) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string   "name"
     t.integer  "goal"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.boolean  "active"
     t.string   "video_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "main_image"
   end
 
   create_table "donations", force: :cascade do |t|
@@ -36,19 +36,20 @@ ActiveRecord::Schema.define(version: 20170131055220) do
 
   create_table "social_shares", force: :cascade do |t|
     t.integer  "solicitation_id"
-    t.string   "type"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "network"
     t.index ["solicitation_id"], name: "index_social_shares_on_solicitation_id"
   end
 
   create_table "solicitations", force: :cascade do |t|
-    t.string   "goal"
+    t.integer  "goal"
     t.string   "main_image"
     t.integer  "campaign_id"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.text     "text"
     t.index ["campaign_id"], name: "index_solicitations_on_campaign_id"
     t.index ["user_id"], name: "index_solicitations_on_user_id"
   end

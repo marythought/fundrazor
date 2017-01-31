@@ -1,16 +1,17 @@
 class SolicitationsController < ApplicationController
+  before_filter :load_campaign
   before_action :set_solicitation, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
   # GET /solicitations
   # GET /solicitations.json
   def index
-    @solicitations = Solicitation.all
+    @solicitations = Solicitation.where("campaign_id": @campaign.id)
+    @title = @campaign.name
   end
 
   # GET /solicitations/1
   # GET /solicitations/1.json
-  def show
-  end
+  def show; end
 
   # GET /solicitations/new
   def new
@@ -18,17 +19,18 @@ class SolicitationsController < ApplicationController
   end
 
   # GET /solicitations/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /solicitations
   # POST /solicitations.json
   def create
     @solicitation = Solicitation.new(solicitation_params)
+    @solicitation.campaign = @campaign
+    @solicitation.user = current_user
 
     respond_to do |format|
       if @solicitation.save
-        format.html { redirect_to @solicitation, notice: 'Solicitation was successfully created.' }
+        format.html { redirect_to campaign_solicitation_path(@campaign, @solicitation), notice: 'Solicitation was successfully created.' }
         format.json { render :show, status: :created, location: @solicitation }
       else
         format.html { render :new }
@@ -62,13 +64,18 @@ class SolicitationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_solicitation
-      @solicitation = Solicitation.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def solicitation_params
-      params.require(:solicitation).permit(:goal, :main_image, :campaign_id, :user_id)
-    end
+  def load_campaign
+    @campaign = Campaign.find(params[:campaign_id])
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_solicitation
+    @solicitation = Solicitation.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def solicitation_params
+    params.require(:solicitation).permit(:goal, :main_image, :text)
+  end
 end

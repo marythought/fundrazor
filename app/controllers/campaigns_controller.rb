@@ -4,13 +4,12 @@ class CampaignsController < ApplicationController
   # GET /campaigns
   # GET /campaigns.json
   def index
-    @campaigns = Campaign.all
+    @campaigns = Campaign.active
   end
 
   # GET /campaigns/1
   # GET /campaigns/1.json
-  def show
-  end
+  def show; end
 
   # GET /campaigns/new
   def new
@@ -18,8 +17,7 @@ class CampaignsController < ApplicationController
   end
 
   # GET /campaigns/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /campaigns
   # POST /campaigns.json
@@ -62,13 +60,14 @@ class CampaignsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_campaign
-      @campaign = Campaign.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def campaign_params
-      params.require(:campaign).permit(:name, :goal, :start_date, :end_date, :active, :video_link)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_campaign
+    @campaign = Campaign.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def campaign_params
+    params.require(:campaign).permit(:name, :goal, :start_date, :end_date, :active, :video_link)
+  end
 end

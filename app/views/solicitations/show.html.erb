@@ -1,24 +1,25 @@
 <p id="notice"><%= notice %></p>
 
+<h1><%= link_to 'DONATE', new_campaign_solicitation_donation_path(@campaign, @solicitation) %></h1>
+
 <p>
   <strong>Goal:</strong>
   <%= @solicitation.goal %>
 </p>
 
 <p>
-  <strong>Main image:</strong>
-  <%= @solicitation.main_image %>
+  <img src="<%= @solicitation.main_image %>" width="600px">
 </p>
 
 <p>
   <strong>Campaign:</strong>
-  <%= @solicitation.campaign %>
+  <%= @solicitation.campaign.name %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @solicitation.user %>
+  <%= @solicitation.user.email %>
 </p>
 
-<%= link_to 'Edit', edit_solicitation_path(@solicitation) %> |
-<%= link_to 'Back', solicitations_path %>
+<%= link_to 'Edit', edit_campaign_solicitation_path(@campaign, @solicitation) %> |
+<%= link_to 'Back', campaign_solicitations_path(@campaign) %>

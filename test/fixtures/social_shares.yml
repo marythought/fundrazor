@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  solicitation: one
-  type: 
+share_one:
+  solicitation: jane_whales
+  network: facebook
 
-two:
-  solicitation: two
-  type: 
+share_two:
+  solicitation: jane_whales
+  network: twitter
+
+share_three:
+  solicitation: james_bees
+  network: twitter
