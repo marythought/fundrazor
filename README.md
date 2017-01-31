@@ -9,9 +9,11 @@ A fundraising app prototype.
 * seed donations -- DONE
 * add fundraiser and donor methods on user -- DONE
 
-* fix nested resource CRUD paths
+* fix nested resource CRUD paths -- in progress
+* build campaign index page (show campaigns) -- in progress
+* only solicitation owners (fundraisers) should see and access edit and delete functions for solicitations.
+* only donation owners (donors) should see and access edit and delete functions for donations.
 
-* build campaign index page (show campaigns) -- DONE
 * build campaign show page (show overall progress to goal, individual cards, team leaderboard, plus a "join" button)
 * build solicitation show page (this is the individual fundraising page for a campaign. has "donate" button and list of donations and comments, as well as progress to goal)
 * add goal and progress to goal to campaign show page. add # of fundraisers, rank them by amount and # of donations (leaderboard)
