@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  goal: MyString
+  main_image: MyString
+  campaign: one
+  user: one
+
+two:
+  goal: MyString
+  main_image: MyString
+  campaign: two
+  user: two

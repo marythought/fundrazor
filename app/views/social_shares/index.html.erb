@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Social Shares</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Solicitation</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @social_shares.each do |social_share| %>
+      <tr>
+        <td><%= social_share.solicitation %></td>
+        <td><%= social_share.type %></td>
+        <td><%= link_to 'Show', social_share %></td>
+        <td><%= link_to 'Edit', edit_social_share_path(social_share) %></td>
+        <td><%= link_to 'Destroy', social_share, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Social Share', new_social_share_path %>

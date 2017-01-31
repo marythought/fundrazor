@@ -1,0 +1,1 @@
+json.partial! "social_shares/social_share", social_share: @social_share
