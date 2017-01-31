@@ -1,11 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+# jane is a fundraiser but not a donor
+jane:
+  email: fundraiser@example.test
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  id: 1
+
+# james is a fundraiser AND a donor
+james:
+  email: fundraiser_donor@example.test
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  id: 2
+
+# bill is a donor and not a fundraiser
+bill:
+  email: donor@example.test
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  id: 3
+
+# generic user has no solicitations or donations
+user:
+  email: user@example.test
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  id: 4

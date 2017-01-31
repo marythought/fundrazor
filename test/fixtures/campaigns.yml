@@ -1,17 +1,22 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  goal: 1
+whales:
+  name: Save the Whales
+  goal: 1000
   start_date: 2017-01-30 21:40:23
-  end_date: 2017-01-30 21:40:23
-  active: false
-  video_link: MyString
+  end_date: 2017-06-30 21:40:23
+  video_link: https://youtu.be/-oYIK6Bg6co
 
-two:
-  name: MyString
-  goal: 1
+bees:
+  name: Save the Bees
+  goal: 5000
   start_date: 2017-01-30 21:40:23
-  end_date: 2017-01-30 21:40:23
-  active: false
-  video_link: MyString
+  end_date: 2017-03-30 21:40:23
+  video_link: https://youtu.be/-oYIK6Bg6co
+
+unstarted:
+  name: Undecided
+  goal: 10000
+  start_date: 2017-02-30 21:40:23
+  end_date: 2017-03-30 21:40:23
+  video_link: https://youtu.be/-oYIK6Bg6co

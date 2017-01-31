@@ -9,7 +9,6 @@
       <th>Goal</th>
       <th>Start date</th>
       <th>End date</th>
-      <th>Active</th>
       <th>Video link</th>
       <th colspan="3"></th>
     </tr>
@@ -22,7 +21,6 @@
         <td><%= campaign.goal %></td>
         <td><%= campaign.start_date %></td>
         <td><%= campaign.end_date %></td>
-        <td><%= campaign.active %></td>
         <td><%= campaign.video_link %></td>
         <td><%= link_to 'Show', campaign %></td>
         <td><%= link_to 'Edit', edit_campaign_path(campaign) %></td>
@@ -35,3 +33,4 @@
 <br>
 
 <%= link_to 'New Campaign', new_campaign_path %>
+<%= link_to 'Back', campaigns_path %>

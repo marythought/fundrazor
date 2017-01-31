@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Campaign Name:</strong>
   <%= @campaign.name %>
 </p>
 
@@ -21,14 +21,11 @@
 </p>
 
 <p>
-  <strong>Active:</strong>
-  <%= @campaign.active %>
-</p>
-
-<p>
   <strong>Video link:</strong>
   <%= @campaign.video_link %>
 </p>
+
+<%= link_to 'JOIN', new_campaign_solicitation_path(@campaign, @solicitation) %> |
 
 <%= link_to 'Edit', edit_campaign_path(@campaign) %> |
 <%= link_to 'Back', campaigns_path %>

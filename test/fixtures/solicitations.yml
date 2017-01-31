@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  goal: MyString
-  main_image: MyString
-  campaign: one
-  user: one
+jane_whales:
+  goal: 100
+  main_image: https://upload.wikimedia.org/wikipedia/commons/9/9e/Humpback_stellwagen_edit.jpg
+  campaign: whales
+  user: jane
 
-two:
-  goal: MyString
-  main_image: MyString
-  campaign: two
-  user: two
+james_bees:
+  goal: 2000
+  main_image: https://upload.wikimedia.org/wikipedia/commons/9/9e/Humpback_stellwagen_edit.jpg
+  campaign: bees
+  user: james
