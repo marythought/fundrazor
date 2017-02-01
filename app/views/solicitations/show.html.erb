@@ -1,25 +1,55 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= link_to 'DONATE', new_campaign_solicitation_donation_path(@campaign, @solicitation) %></h1>
+<h2> SHARE </h2>
 
 <p>
-  <strong>Goal:</strong>
+  <strong>My Fundraising Goal is</strong>
   <%= @solicitation.goal %>
 </p>
+
+<p>
+  <strong>
+    <% if @solicitation.amount_raised %>
+    I've raised <%= @solicitation.amount_raised %>.
+    <% end %>
+    <%= @solicitation.amount_needed %> to go! Can you help??
+  </strong>
+
+  <h1><%= link_to 'DONATE', new_campaign_solicitation_donation_path(@campaign, @solicitation) %></h1>
+<!-- add bootstrap or DIY progress bar -->
 
 <p>
   <img src="<%= @solicitation.main_image %>" width="600px">
 </p>
 
 <p>
+  <strong>About:</strong>
+  <%= @solicitation.text %>
+</p>
+<p>
   <strong>Campaign:</strong>
   <%= @solicitation.campaign.name %>
 </p>
 
 <p>
-  <strong>User:</strong>
+  <strong>Fundraiser:</strong>
   <%= @solicitation.user.email %>
 </p>
 
-<%= link_to 'Edit', edit_campaign_solicitation_path(@campaign, @solicitation) %> |
-<%= link_to 'Back', campaign_solicitations_path(@campaign) %>
+<!-- link to donations linked to this solicitation -->
+<ul>
+  <% @solicitation.donations.each do | donation | %>
+
+    <li><%= donation.amount %> | <%= donation.comment %> | by <%= donation.user.email %>
+      <% if donation.user == current_user %>
+        <%= link_to 'edit', edit_campaign_solicitation_donation_path(@campaign, @solicitation, donation) %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<% if current_user == @solicitation.user %>
+  <%= link_to 'Edit this Fundraising Page', edit_campaign_solicitation_path(@campaign, @solicitation) %> |
+<% end %>
+
+<%= link_to 'Back to Campaign Page', campaign_path(@campaign) %>

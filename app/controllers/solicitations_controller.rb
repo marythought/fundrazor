@@ -2,6 +2,7 @@ class SolicitationsController < ApplicationController
   before_filter :load_campaign
   before_action :set_solicitation, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
+  before_action :authorize_fundraiser, only: [:edit, :update, :destroy]
   # GET /solicitations
   # GET /solicitations.json
   def index
@@ -28,28 +29,20 @@ class SolicitationsController < ApplicationController
     @solicitation.campaign = @campaign
     @solicitation.user = current_user
 
-    respond_to do |format|
-      if @solicitation.save
-        format.html { redirect_to campaign_solicitation_path(@campaign, @solicitation), notice: 'Solicitation was successfully created.' }
-        format.json { render :show, status: :created, location: @solicitation }
-      else
-        format.html { render :new }
-        format.json { render json: @solicitation.errors, status: :unprocessable_entity }
-      end
+    if @solicitation.save
+      redirect_to campaign_solicitation_path(@campaign, @solicitation), notice: 'Solicitation was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /solicitations/1
   # PATCH/PUT /solicitations/1.json
   def update
-    respond_to do |format|
-      if @solicitation.update(solicitation_params)
-        format.html { redirect_to @solicitation, notice: 'Solicitation was successfully updated.' }
-        format.json { render :show, status: :ok, location: @solicitation }
-      else
-        format.html { render :edit }
-        format.json { render json: @solicitation.errors, status: :unprocessable_entity }
-      end
+    if @solicitation.update(solicitation_params)
+      redirect_to campaign_solicitation_path(@campaign, @solicitation), notice: 'Solicitation was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -57,13 +50,14 @@ class SolicitationsController < ApplicationController
   # DELETE /solicitations/1.json
   def destroy
     @solicitation.destroy
-    respond_to do |format|
-      format.html { redirect_to solicitations_url, notice: 'Solicitation was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to solicitations_url, notice: 'Solicitation was successfully destroyed.'
   end
 
   private
+
+  def authorize_fundraiser
+    redirect_to campaign_solicitation_path(@campaign, @solicitation) unless @solicitation.user == current_user
+  end
 
   def load_campaign
     @campaign = Campaign.find(params[:campaign_id])

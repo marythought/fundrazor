@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Campaign Name:</strong>
-  <%= @campaign.name %>
-</p>
+<h1> <%= @campaign.name %> </h1>
 
 <p>
   <strong>Goal:</strong>
@@ -21,11 +18,18 @@
 </p>
 
 <p>
-  <strong>Video link:</strong>
-  <%= @campaign.video_link %>
+  <iframe width="560" height="315" src="<%= @campaign.youtube_url %>" frameborder="0" allowfullscreen></iframe>
 </p>
 
-<%= link_to 'JOIN', new_campaign_solicitation_path(@campaign, @solicitation) %> |
+<!-- add video -->
+<!-- add all linked solicitations with link to each solicitation's "show" page -->
+<h2> Fundraisers: </h2>
+<ul>
+<% @campaign.solicitations.each do |solicitation| %>
+  <li> <%= link_to solicitation.user.email, campaign_solicitation_path(@campaign, solicitation) %> </li>
+<% end %>
+</ul>
 
-<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
+<%= link_to 'JOIN CAMPAIGN', new_campaign_solicitation_path(@campaign, @solicitation) %> |
+
 <%= link_to 'Back', campaigns_path %>

@@ -3,6 +3,7 @@ class DonationsController < ApplicationController
   before_filter :load_solicitation
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
   before_action :set_donation, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_donor, only: [:edit, :update, :destroy]
 
   # GET /donations
   # GET /donations.json
@@ -29,28 +30,20 @@ class DonationsController < ApplicationController
     @donation.user = current_user
     @donation.solicitation = @solicitation
 
-    respond_to do |format|
-      if @donation.save
-        format.html { redirect_to campaign_solicitation_path(@campaign, @solicitation), notice: 'Donation was successfully created.' }
-        format.json { render :show, status: :created, location: @donation }
-      else
-        format.html { render :new }
-        format.json { render json: @donation.errors, status: :unprocessable_entity }
-      end
+    if @donation.save
+      redirect_to campaign_solicitation_path(@campaign, @solicitation), notice: 'Donation was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /donations/1
   # PATCH/PUT /donations/1.json
   def update
-    respond_to do |format|
-      if @donation.update(donation_params)
-        format.html { redirect_to @donation, notice: 'Donation was successfully updated.' }
-        format.json { render :show, status: :ok, location: @donation }
-      else
-        format.html { render :edit }
-        format.json { render json: @donation.errors, status: :unprocessable_entity }
-      end
+    if @donation.update(donation_params)
+      redirect_to campaign_solicitation_path(@campaign, @solicitation), notice: 'Donation was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -58,10 +51,7 @@ class DonationsController < ApplicationController
   # DELETE /donations/1.json
   def destroy
     @donation.destroy
-    respond_to do |format|
-      format.html { redirect_to donations_url, notice: 'Donation was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to donations_url, notice: 'Donation was successfully destroyed.'
   end
 
   private
@@ -72,6 +62,10 @@ class DonationsController < ApplicationController
 
   def load_solicitation
     @solicitation = Solicitation.find(params[:solicitation_id])
+  end
+
+  def authorize_donor
+    redirect_to campaign_solicitation_path(@campaign, @solicitation) unless @donation.user == current_user
   end
 
   # Use callbacks to share common setup or constraints between actions.
