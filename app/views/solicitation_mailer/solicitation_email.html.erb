@@ -9,7 +9,7 @@
       I'm raising money for <%= @campaign.name %>. Can you help me?<br>
     </p>
     <p>
-      Just follow this link: <%= link_to 'my fundraiser', campaign_solicitation_url([@campaign, @solicitation]) %>.
+      Just follow this link: <%= link_to 'my fundraiser', campaign_url(@campaign) %>.
     </p>
     <p>Thanks for reading and have a great day! <%= @user.email %></p>
   </body>

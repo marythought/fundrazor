@@ -1,6 +1,6 @@
 class SolicitationsController < ApplicationController
   before_filter :load_campaign
-  before_action :set_solicitation, only: [:show, :edit, :update, :destroy, :share, :email]
+  before_action :set_solicitation, only: [:show, :edit, :update, :destroy, :email]
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy, :email]
   before_action :authorize_fundraiser, only: [:edit, :update, :destroy]
   # GET /solicitations
@@ -54,8 +54,8 @@ class SolicitationsController < ApplicationController
 
   def email
     contact = params[:contact]
-    SolicitationMailer.solicitation_email(@campaign, @solicitation, current_user, contact)
-    redirect_to root_path
+    SolicitationMailer.solicitation_email(@campaign, @solicitation, current_user, contact).deliver_now
+    redirect_to campaign_solicitation_path(@campaign, @solicitation), notice: 'Email sent.'
   end
 
   private

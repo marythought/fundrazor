@@ -3,6 +3,6 @@ class SolicitationMailer < ApplicationMailer
     @campaign = campaign
     @solicitation = solicitation
     @user = user
-    mail(to: contact, subject: 'Please check out my fundraiser!')
+    mail(to: contact, subject: 'Please check out my fundraiser!').deliver
   end
 end

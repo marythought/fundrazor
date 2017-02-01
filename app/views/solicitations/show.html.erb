@@ -48,7 +48,7 @@
   <% end %>
 </ul>
 
-<%= form_tag(controller: "solicitations", action: "email", method: "post") do %>
+<%= form_tag(controller: "solicitations", action: "email", method: "post", campaign_id: @campaign.id, id: @solicitation.id) do %>
 
   <%= label_tag(:contact, "Add an email address to send this page to:") %>
   <%= text_field_tag(:contact) %>
