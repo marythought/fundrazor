@@ -48,6 +48,14 @@
   <% end %>
 </ul>
 
+<%= form_tag(controller: "solicitations", action: "email", method: "post") do %>
+
+  <%= label_tag(:contact, "Add an email address to send this page to:") %>
+  <%= text_field_tag(:contact) %>
+  <%= submit_tag("Email") %>
+
+<% end %>
+
 <% if current_user == @solicitation.user %>
   <%= link_to 'Edit this Fundraising Page', edit_campaign_solicitation_path(@campaign, @solicitation) %> |
 <% end %>

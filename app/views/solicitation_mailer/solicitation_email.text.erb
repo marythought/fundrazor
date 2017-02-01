@@ -1,0 +1,8 @@
+Help My Fundraiser!
+
+I'm raising money for <%= @campaign.name %>. Can you help me?
+
+Just follow this link: <%= link_to 'my fundraiser', campaign_solicitation_url(@campaign, @solicitation) %>.
+
+Thanks for reading and have a great day!
+<%= @user.email %>
