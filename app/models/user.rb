@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   # when user is a fundraiser:
   has_many :campaigns, through: :solicitations
+  has_many :solicitations
 
   def donor?
     !Donation.where(user_id: id).empty?
@@ -16,5 +17,13 @@ class User < ApplicationRecord
 
   def fundraiser?
     !Solicitation.where(user_id: id).empty?
+  end
+
+  def all_funds_raised
+    solicitations.map(&:donations).map(&:amount).reduce(&:+)
+  end
+
+  def funds_donated_by_campaign(campaign)
+    donations.filter { |d| d.campaign_id == campaign.id }.map(&:amount).reduce(&:+)
   end
 end
