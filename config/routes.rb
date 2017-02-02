@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :campaigns do
     resources :solicitations do
       resources :donations
+      collection do
+        post 'email'
+      end
     end
   end
   devise_for :users

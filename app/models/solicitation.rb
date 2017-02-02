@@ -1,16 +1,23 @@
 class Solicitation < ApplicationRecord
   belongs_to :campaign
   belongs_to :user
+  has_many :donations
 
-  def donations
-    Donation.where("solicitation_id": id)
-  end
+  validates :goal, numericality: { greater_than_or_equal_to: 0 }
 
   def amount_raised
-    donations.map { |d| d.amount }.reduce(&:+)
+    if !donations.empty?
+      donations.map(&:amount).reduce(&:+)
+    else
+      0
+    end
+  end
+
+  def number_of_donations
+    donations.count
   end
 
   def amount_needed
-    amount_raised ? goal - amount_raised : goal
+    goal - amount_raised
   end
 end

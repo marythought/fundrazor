@@ -1,18 +1,18 @@
 class SolicitationsController < ApplicationController
   before_filter :load_campaign
-  before_action :set_solicitation, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
+  before_action :set_solicitation, only: [:show, :edit, :update, :destroy, :email]
+  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy, :email]
   before_action :authorize_fundraiser, only: [:edit, :update, :destroy]
   # GET /solicitations
   # GET /solicitations.json
   def index
-    @solicitations = Solicitation.where("campaign_id": @campaign.id)
-    @title = @campaign.name
+    redirect_to campaign_path(@campaign)
   end
 
   # GET /solicitations/1
   # GET /solicitations/1.json
-  def show; end
+  def show
+  end
 
   # GET /solicitations/new
   def new
@@ -51,6 +51,12 @@ class SolicitationsController < ApplicationController
   def destroy
     @solicitation.destroy
     redirect_to solicitations_url, notice: 'Solicitation was successfully destroyed.'
+  end
+
+  def email
+    contact = params[:contact]
+    SolicitationMailer.solicitation_email(@campaign, @solicitation, current_user, contact).deliver_now
+    redirect_to campaign_solicitation_path(@campaign, @solicitation), notice: 'Email sent.'
   end
 
   private

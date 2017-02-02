@@ -17,7 +17,7 @@
     <% @campaigns.each do |campaign| %>
       <tr>
         <td><%= campaign.name %></td>
-        <td><%= campaign.goal %></td>
+        <td><%=number_to_currency(campaign.goal) %></td>
         <td><%= campaign.start_date %></td>
         <td><%= campaign.end_date %></td>
         <td><%= link_to 'Show', campaign %></td>
