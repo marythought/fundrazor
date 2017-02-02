@@ -4,9 +4,13 @@
 
 <p>
   <strong>Goal:</strong>
-  <%= @campaign.goal %>
+  <%= number_to_currency(@campaign.goal) %>
 </p>
 
+<p>
+  <strong>Amount Raised:</strong>
+  <%= number_to_currency(@campaign.amount_raised) %>
+</p>
 <p>
   <strong>Start date:</strong>
   <%= @campaign.start_date %>
@@ -17,9 +21,11 @@
   <%= @campaign.end_date %>
 </p>
 
+<% if @campaign.video_link.present? %>
 <p>
   <iframe width="560" height="315" src="<%= @campaign.youtube_url %>" frameborder="0" allowfullscreen></iframe>
 </p>
+<% end %>
 
 <!-- add video -->
 <!-- add all linked solicitations with link to each solicitation's "show" page -->
@@ -29,6 +35,19 @@
   <li> <%= link_to solicitation.user.email, campaign_solicitation_path(@campaign, solicitation) %> </li>
 <% end %>
 </ul>
+
+<h2> Leaderboard: </h2>
+<h3>Top Fundraisers!</h3>
+<% @top_amount.each do | fundraiser | %>
+<%= fundraiser[1] %> has raised <%= number_to_currency(fundraiser[0]) %>!
+<% end %>
+
+<h3>Most Number of Donations!</h3>
+<% @top_number.each do | fundraiser | %>
+<%= fundraiser[1] %> has secured <%= fundraiser[0] %> donations!
+<% end %>
+
+<p>Way to go!</p>
 
 <%= link_to 'JOIN CAMPAIGN', new_campaign_solicitation_path(@campaign, @solicitation) %> |
 

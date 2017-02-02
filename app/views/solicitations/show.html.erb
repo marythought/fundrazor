@@ -1,26 +1,26 @@
 <p id="notice"><%= notice %></p>
 
-<h2> SHARE </h2>
-
 <p>
   <strong>My Fundraising Goal is</strong>
-  <%= @solicitation.goal %>
+  <%= number_to_currency(@solicitation.goal) %>
 </p>
 
 <p>
   <strong>
     <% if @solicitation.amount_raised %>
-    I've raised <%= @solicitation.amount_raised %>.
+    I've raised <%= number_to_currency(@solicitation.amount_raised) %>.
     <% end %>
-    <%= @solicitation.amount_needed %> to go! Can you help??
+    <%= number_to_currency(@solicitation.amount_needed) %> to go! Can you help??
   </strong>
 
   <h1><%= link_to 'DONATE', new_campaign_solicitation_donation_path(@campaign, @solicitation) %></h1>
 <!-- add bootstrap or DIY progress bar -->
 
+<% unless @solicitation.main_image.empty? %>
 <p>
   <img src="<%= @solicitation.main_image %>" width="600px">
 </p>
+<% end %>
 
 <p>
   <strong>About:</strong>
@@ -37,10 +37,11 @@
 </p>
 
 <!-- link to donations linked to this solicitation -->
+<h3>Donations:</h3>
 <ul>
   <% @solicitation.donations.each do | donation | %>
 
-    <li><%= donation.amount %> | <%= donation.comment %> | by <%= donation.user.email %>
+    <li><%= number_to_currency(donation.amount) %> | <%= donation.comment %> | by <%= donation.user.email %>
       <% if donation.user == current_user %>
         <%= link_to 'edit', edit_campaign_solicitation_donation_path(@campaign, @solicitation, donation) %>
       <% end %>
@@ -48,12 +49,14 @@
   <% end %>
 </ul>
 
+<h3>SHARE!</h3>
+<%= social_share_button_tag(@campaign.name) %>
+
 <%= form_tag(controller: "solicitations", action: "email", method: "post", campaign_id: @campaign.id, id: @solicitation.id) do %>
 
   <%= label_tag(:contact, "Add an email address to send this page to:") %>
   <%= text_field_tag(:contact) %>
   <%= submit_tag("Email") %>
-
 <% end %>
 
 <% if current_user == @solicitation.user %>

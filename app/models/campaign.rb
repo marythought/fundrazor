@@ -3,9 +3,14 @@ class Campaign < ApplicationRecord
   has_many :solicitations
 
   validates :name, presence: true
+  validates :goal, numericality: { greater_than_or_equal_to: 0 }
 
   def self.active
     Campaign.where('start_date <= ? AND end_date >= ?', Time.now, Time.now)
+  end
+
+  def goal_met?
+    amount_raised > goal
   end
 
   def youtube_id
@@ -20,8 +25,24 @@ class Campaign < ApplicationRecord
     users.map(&:email)
   end
 
+  def fundraisers_by_amount_raised
+    solicitations.map do |s|
+      [s.amount_raised, s.user.email]
+    end.sort.reverse
+  end
+
+  def fundraisers_by_number_of_donations
+    solicitations.map do |s|
+      [s.number_of_donations, s.user.email]
+    end.sort.reverse
+  end
+
   def amount_raised
-    users.map
+    if !solicitations.empty?
+      solicitations.map(&:amount_raised).reduce(&:+)
+    else
+      0
+    end
   end
 
   def amount_needed; end

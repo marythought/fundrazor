@@ -9,7 +9,10 @@ class CampaignsController < ApplicationController
 
   # GET /campaigns/1
   # GET /campaigns/1.json
-  def show; end
+  def show
+    @top_amount = @campaign.fundraisers_by_amount_raised.select { |f| f[0] > 0 }
+    @top_number = @campaign.fundraisers_by_number_of_donations.select { |f| f[0] > 0 }
+  end
 
   # GET /campaigns/new
   def new

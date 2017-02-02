@@ -11,7 +11,8 @@ class SolicitationsController < ApplicationController
 
   # GET /solicitations/1
   # GET /solicitations/1.json
-  def show; end
+  def show
+  end
 
   # GET /solicitations/new
   def new
