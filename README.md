@@ -33,26 +33,33 @@ A fundraising app prototype to process donations for fundraisers.
 * build solicitation show page (this is the individual fundraising page for a campaign. has "donate" button and list of donations and comments, as well as progress to goal)
 * build donation form
 * build campaign index page (show campaigns) -- in progress
+* validate no negative goals or donations
+* add model tests
+* add goal and progress to goal to campaign show page. add # of fundraisers, rank them by amount and # of donations (leaderboard)
+* handle goal met for individual fundraisers and campaigns
+* add user login and signup links
+* add goldiloader for eager loading
+* rerun erd (bundle exec erd)
+* remove social shares table
 
 ## TODO
-### FUNCTIONALITY
-* handle goal met for individual fundraisers and campaigns
-* countdown to days left in campaign
+* Allow fundraisers to delete their solicitation page
+* Fix FB share?
 
 ### LAYOUT
-* add goal and progress to goal to campaign show page. add # of fundraisers, rank them by amount and # of donations (leaderboard)
 * add styling
 
 ### TESTS & VALIDATION
-* validate no negative goals or donations
-* add model tests
 * integration tests
 * load test
 
 ### LATER / MAYBE
+* Add an email preview
+* countdown to days left in campaign
+* add search in campaign index
 * send emails via delayed jobs
-* add social_share record to database and count to solicitation show page
-* add bootstrap progress bar to campaign and solicitation page
+* add social_share table to database and track share count on solicitation show page
+* add custom or bootstrap progress bar to campaign and solicitation page
 * paperclip for uploading images
 * add name to users (currently using email)
 
@@ -62,3 +69,6 @@ A fundraising app prototype to process donations for fundraisers.
 1. Does this have to be through our site? Something like mail chimp much better for mass emailing. We'd have to handle unsubscribe somehow. Maybe instead of doing the emailing we could generate a template for a person to email to their contacts (more personal that way anyway), and just count social shares?
 
 2. If it must be sent through our site, probably want to keep a record of who sent to. Add a new class "Referrals" with an id, an email address, a user_id, solicitation_id and date sent. Check this table before sending to make sure we're not emailing anyone twice, unless desired.
+
+#### Eager loading / Load testing
+Using Goldiloader gem which brings in smart eager loading. With high volume of donations there could be even more efficiencies. Want to look at pages that are loading donations, solicitations, and users linked to campaigns.
