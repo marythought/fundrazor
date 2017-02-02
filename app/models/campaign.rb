@@ -45,5 +45,7 @@ class Campaign < ApplicationRecord
     end
   end
 
-  def amount_needed; end
+  def amount_needed
+    goal - amount_raised
+  end
 end

@@ -1,12 +1,11 @@
 # README
-
 A fundraising app prototype to process donations for fundraisers.
 
 * Focus on object oriented database design, scaling, and testing models.
 * Users should be able to join a fundraiser to send communications and share the fundraiser’s URL.
 * Each user should be able to track their participation and performance on the fundraiser.
 
-## TODO
+## USER STORIES
 * As a fundraiser I want to collect donations for my campaign.
 * As a fundraiser I want to send communications and share URL for my campaign.
 * As a fundraiser I want to track my participation and performance.
@@ -35,6 +34,7 @@ A fundraising app prototype to process donations for fundraisers.
 * build donation form
 * build campaign index page (show campaigns) -- in progress
 
+## TODO
 ### FUNCTIONALITY
 * handle goal met for individual fundraisers and campaigns
 * countdown to days left in campaign

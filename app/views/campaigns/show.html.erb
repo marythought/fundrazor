@@ -11,6 +11,11 @@
   <strong>Amount Raised:</strong>
   <%= number_to_currency(@campaign.amount_raised) %>
 </p>
+
+<% if @campaign.goal_met? %>
+<h2>This campaign has met its goal!! Horray! You can still donate through a fundraising page though, or join the campaign.</h2>
+<% end %>
+
 <p>
   <strong>Start date:</strong>
   <%= @campaign.start_date %>
@@ -37,15 +42,19 @@
 </ul>
 
 <h2> Leaderboard: </h2>
-<h3>Top Fundraisers!</h3>
-<% @top_amount.each do | fundraiser | %>
-<%= fundraiser[1] %> has raised <%= number_to_currency(fundraiser[0]) %>!
-<% end %>
+<h3>By Funds Raised:</h3>
+<ol>
+  <% @top_amount.each do | fundraiser | %>
+    <li><%= fundraiser[1] %> has raised <%= number_to_currency(fundraiser[0]) %>!</li>
+  <% end %>
+</ol>
 
-<h3>Most Number of Donations!</h3>
-<% @top_number.each do | fundraiser | %>
-<%= fundraiser[1] %> has secured <%= fundraiser[0] %> donations!
-<% end %>
+<h3>By Number of Donations:</h3>
+<ol>
+  <% @top_number.each do | fundraiser | %>
+    <li><%= fundraiser[1] %> has secured <%= fundraiser[0] %> donations! </li>
+  <% end %>
+</ol>
 
 <p>Way to go!</p>
 
