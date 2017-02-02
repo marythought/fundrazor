@@ -19,6 +19,21 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.new
   end
 
+  def edit; end
+
+  def update
+    if @campaign.update(campaign_params)
+      redirect_to campaign_path(@campaign), notice: 'Campaign was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @campaign.destroy
+    redirect_to campaigns_url, notice: 'Campaign was successfully destroyed.'
+  end
+
   # no edit/update/delete for now -- may add later, requires a campaign owner. for now anyone can can a campaign but no one can change or remove.
 
   # POST /campaigns

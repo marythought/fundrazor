@@ -13,6 +13,10 @@ class Solicitation < ApplicationRecord
     end
   end
 
+  def goal_met?
+    amount_raised > goal
+  end
+
   def number_of_donations
     donations.count
   end

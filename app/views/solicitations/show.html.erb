@@ -1,19 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>My Fundraising Goal is</strong>
-  <%= number_to_currency(@solicitation.goal) %>
-</p>
+<p>My Fundraising Goal is <%= number_to_currency(@solicitation.goal) %>. I've raised <%= number_to_currency(@solicitation.amount_raised) %>.</p>
 
-<p>
-  <strong>
-    <% if @solicitation.amount_raised %>
-    I've raised <%= number_to_currency(@solicitation.amount_raised) %>.
-    <% end %>
-    <%= number_to_currency(@solicitation.amount_needed) %> to go! Can you help??
-  </strong>
+<% if @solicitation.goal_met? %>
+<h2>This fundraiser has met their goal!! Horray! You can still donate though, or join the campaign.</h2>
+<% else %>
+<p><%= number_to_currency(@solicitation.amount_needed) %> to go! Can you help??</p>
+<% end %>
 
-  <h1><%= link_to 'DONATE', new_campaign_solicitation_donation_path(@campaign, @solicitation) %></h1>
+<h1><%= link_to 'DONATE', new_campaign_solicitation_donation_path(@campaign, @solicitation) %></h1>
 <!-- add bootstrap or DIY progress bar -->
 
 <% unless @solicitation.main_image.empty? %>
