@@ -10,8 +10,4 @@ class User < ApplicationRecord
   # when user is a fundraiser:
   has_many :campaigns, through: :solicitations
   has_many :solicitations
-
-  def funds_raised; end
-
-  def funds_raised_by_solicitation(solicitation); end
 end

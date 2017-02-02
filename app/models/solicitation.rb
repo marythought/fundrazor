@@ -3,7 +3,7 @@ class Solicitation < ApplicationRecord
   belongs_to :user
   has_many :donations
 
-  # validates goal must be present and greater than 0
+  validates :goal, numericality: { greater_than_or_equal_to: 0 }
 
   def amount_raised
     if !donations.empty?
