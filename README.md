@@ -32,8 +32,9 @@ A fundraising app prototype to process donations for fundraisers.
 * add goal and progress to goal to solicitation show page (individual progress)
 * build solicitation show page (this is the individual fundraising page for a campaign. has "donate" button and list of donations and comments, as well as progress to goal)
 * build donation form
-* build campaign index page (show campaigns) -- in progress
+* build campaign index page (show campaigns)
 * validate no negative goals or donations
+* add factory girl and factories for testing
 * add model tests
 * add goal and progress to goal to campaign show page. add # of fundraisers, rank them by amount and # of donations (leaderboard)
 * handle goal met for individual fundraisers and campaigns
@@ -41,20 +42,18 @@ A fundraising app prototype to process donations for fundraisers.
 * add goldiloader for eager loading
 * rerun erd (bundle exec erd)
 * remove social shares table
+* integration tests (started, not fully fleshed out)
 
-## TODO
-* Allow fundraisers to delete their solicitation page
-* Fix FB share?
-
-### LAYOUT
+### TODO
 * add styling
-
-### TESTS & VALIDATION
-* integration tests
 * load test
-
-### LATER / MAYBE
+* Allow fundraisers to delete their solicitation page
+* Add a user owner to campaigns (coach) and restrict CRUD to campaign owner
+* Add option to make a campaign private
+* Add a view for users to track 1) their donations and 2) donations from their solicitation page(s). Include option to toggle thank you note sent and/or email multiple donors.
+* Change email share to include multiple email addresses, comma separated
 * Add an email preview
+* Add an "Update" feature -- polymorphic -- campaigns and solicitations are "updatable"
 * countdown to days left in campaign
 * add search in campaign index
 * send emails via delayed jobs
@@ -65,10 +64,9 @@ A fundraising app prototype to process donations for fundraisers.
 
 ### For Discussion
 
-#### Email sharing
-1. Does this have to be through our site? Something like mail chimp much better for mass emailing. We'd have to handle unsubscribe somehow. Maybe instead of doing the emailing we could generate a template for a person to email to their contacts (more personal that way anyway), and just count social shares?
 
-2. If it must be sent through our site, probably want to keep a record of who sent to. Add a new class "Referrals" with an id, an email address, a user_id, solicitation_id and date sent. Check this table before sending to make sure we're not emailing anyone twice, unless desired.
+1. Email sharing: How important is tracking shares and/or enabling email sharing? If important, does it have to be through our site? Something like mail chimp much better for mass emailing. We'd have to handle unsubscribe somehow. Maybe instead of doing the emailing we could generate a template for a person to email to their contacts (more personal that way anyway), and just count social shares? If it must be sent through our site, probably want to keep a record of who sent to. Add a new class "Referrals" with an id, an email address, a user_id, solicitation_id and date sent. Check this table before sending to make sure we're not emailing anyone twice, unless desired.
 
-#### Eager loading / Load testing
-Using Goldiloader gem which brings in smart eager loading. With high volume of donations there could be even more efficiencies. Want to look at pages that are loading donations, solicitations, and users linked to campaigns.
+2. fundraisers_by_amount_raised and fundraisers_by_number_of_donations could both be refactored -- but how?? getting called from campaigns controller. Doing an n + 1 load but I'm not sure how to tackle this since it goes a couple layers deep...eager load? includes?
+
+3. Given more time, would add formatting and improve social sharing options. Improve user roles. See Code Fellows project "U-Deal-It" for example of a similar but more built out version of this.

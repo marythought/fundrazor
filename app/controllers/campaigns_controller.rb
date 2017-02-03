@@ -10,7 +10,9 @@ class CampaignsController < ApplicationController
   # GET /campaigns/1
   # GET /campaigns/1.json
   def show
+    # solicitations where campaign_id == @campaign.id.include donations include donation.users return s.amount raised and user email
     @top_amount = @campaign.fundraisers_by_amount_raised.select { |f| f[0] > 0 }
+    # solicitations where campaign_id == @campaign.id.include donations and users, return user.email and d.size
     @top_number = @campaign.fundraisers_by_number_of_donations.select { |f| f[0] > 0 }
   end
 
