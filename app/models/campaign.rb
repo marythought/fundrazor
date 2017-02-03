@@ -5,12 +5,10 @@ class Campaign < ApplicationRecord
   validates :name, presence: true
   validates :goal, numericality: { greater_than_or_equal_to: 0 }
 
+  include Trackable
+
   def self.active
     Campaign.where('start_date <= ? AND end_date >= ?', Time.now, Time.now)
-  end
-
-  def goal_met?
-    amount_raised > goal
   end
 
   def youtube_id
@@ -45,7 +43,4 @@ class Campaign < ApplicationRecord
     end
   end
 
-  def amount_needed
-    goal - amount_raised
-  end
 end

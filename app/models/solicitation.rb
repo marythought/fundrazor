@@ -4,6 +4,7 @@ class Solicitation < ApplicationRecord
   has_many :donations
 
   validates :goal, numericality: { greater_than_or_equal_to: 0 }
+  include Trackable
 
   def amount_raised
     if !donations.empty?
@@ -13,15 +14,7 @@ class Solicitation < ApplicationRecord
     end
   end
 
-  def goal_met?
-    amount_raised > goal
-  end
-
   def number_of_donations
-    donations.count
-  end
-
-  def amount_needed
-    goal - amount_raised
+    donations.size
   end
 end
