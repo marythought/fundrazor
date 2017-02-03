@@ -48,6 +48,8 @@ A fundraising app prototype to process donations for fundraisers.
 * add styling
 * load test
 * Allow fundraisers to delete their solicitation page
+* Add thank you note email send to donor after donation is made
+* "Remind me" option for potential donors -- they click a button and enter their email, and we'll send a notice 3 days before the campaign ends. AND/OR automatically send this for anyone the fundraiser has emailed re: the campaign (if no donation)
 * Add a user owner to campaigns (coach) and restrict CRUD to campaign owner
 * Add option to make a campaign private
 * Add a view for users to track 1) their donations and 2) donations from their solicitation page(s). Include option to toggle thank you note sent and/or email multiple donors.
@@ -64,9 +66,14 @@ A fundraising app prototype to process donations for fundraisers.
 
 ### For Discussion
 
+1. Next step (because gonna need it for other stuff) would be to add user owner to campaign (coach).
 
-1. Email sharing: How important is tracking shares and/or enabling email sharing? If important, does it have to be through our site? Something like mail chimp much better for mass emailing. We'd have to handle unsubscribe somehow. Maybe instead of doing the emailing we could generate a template for a person to email to their contacts (more personal that way anyway), and just count social shares? If it must be sent through our site, probably want to keep a record of who sent to. Add a new class "Referrals" with an id, an email address, a user_id, solicitation_id and date sent. Check this table before sending to make sure we're not emailing anyone twice, unless desired.
+2. Email sharing: How important is tracking shares and/or enabling email sharing? If important, does it have to be through our site? Something like mail chimp much better for mass emailing. We'd have to handle unsubscribe somehow. Maybe instead of doing the emailing we could generate a template for a person to email to their contacts (more personal that way anyway), and just count social shares? If it must be sent through our site, probably want to keep a record of who sent to. Add a new class "Referrals" with an id, an email address, a user_id, solicitation_id and date sent. Check this table before sending to make sure we're not emailing anyone twice, unless desired.
 
-2. fundraisers_by_amount_raised and fundraisers_by_number_of_donations could both be refactored -- but how?? getting called from campaigns controller. Doing an n + 1 load but I'm not sure how to tackle this since it goes a couple layers deep...eager load? includes?
+3. fundraisers_by_amount_raised and fundraisers_by_number_of_donations could both be refactored -- but how?? getting called from campaigns controller. Doing an n + 1 load but I'm not sure how to tackle this since it goes a couple layers deep...eager load? includes?
 
-3. Given more time, would add formatting and improve social sharing options. Improve user roles. See Code Fellows project "U-Deal-It" for example of a similar but more built out version of this.
+4. Add a method to add in offline donations (either coach or fundraiser)
+
+5. Additional stats -- ex: average donation amount. https://www.humblebundle.com does this really well.
+
+6. Given more time, would add formatting and improve social sharing options. Improve user roles. See Code Fellows project "U-Deal-It" for example of a similar but more built out version of this.

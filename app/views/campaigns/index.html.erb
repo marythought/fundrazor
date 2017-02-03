@@ -19,7 +19,7 @@
         <td><%= campaign.name %></td>
         <td><%=number_to_currency(campaign.goal) %></td>
         <td><%= number_to_currency(campaign.amount_raised) %></td>
-        <td><%= campaign.fundraisers.count %></td>
+        <td><%= campaign.solicitations.size %></td>
         <td><%= link_to 'Show', campaign %></td>
         <td><%= link_to 'Edit Campaign', edit_campaign_path(campaign) %></td>
         <td><%= link_to 'Remove', campaign_path(campaign), method: :delete, data: {confirm: "Are you sure?"} %></td>
